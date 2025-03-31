@@ -1,7 +1,5 @@
-.. Example documentation master file, created by
-   sphinx-quickstart on Sat Sep 23 20:35:12 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. QuakeT documentation master file created by
+   Created on Fri, Mar 28th, 2023.
 
 Welcome to the QuakeT documentation!
 ====================================
