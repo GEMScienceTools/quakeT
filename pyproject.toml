@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools >= 69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openquake.quaket"
+dynamic = ["version"]
+description = "QuakeT"
+readme = """
+Python and OpenQuake-based Toolkit for the checking componentns of hazard 
+models and simulating component used to build them
+Copyright (C) 2025 GEM Foundation
+"""
+license = { text = "AGPL-3.0-only" }
+authors = [
+    { name = "GEM Foundation, Électricité de France S.A.", email = "hazard@globalquakemodel.org" },
+]
+maintainers = [
+    { name = "GEM Foundation, Électricité de France S.A.", email = "hazard@globalquakemodel.org" },
+]
+
+keywords = [
+    "hazard",
+    "seismic",
+    "simulation",
+    "check",
+    "PSHA",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python ",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+
+requires-python = ">=3.10, <3.13"
+dependencies = [
+]
+
+
+[project.urls]
+Homepage = "https://github.com/GEMScienceTools/quaket"
+Repository = "https://github.com/GEMScienceTools/quaket"
+Documentation = "https://gemsciencetools.github.io/quakeT/"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["openquake*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = [
+	"tests",
+	"tests.*"
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "openquake.quaket.__version__"}
