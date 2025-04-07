@@ -1,0 +1,7 @@
+Auxiliary module
+################################
+
+The :index:`Auxiliary` module contains code for the the simulation of each fundamental step of the earthquake process such as statistical, spatial representation, and input/output (I/O) functionalities. 
+
+Moreover, this auxiliary module will contain the built-in databases. 
+*********************************************
