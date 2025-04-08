@@ -27,7 +27,6 @@ Currently the QuakeT includes five sub-modules:
    :maxdepth: 2
    :caption: Contents:
 
-   contents/installation
    contents/auxiliary
    contents/ssc
    contents/gmc
