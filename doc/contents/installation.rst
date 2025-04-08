@@ -1,10 +1,10 @@
 Installation
 ============
-The **quakeT** is installed with the procedure described in the following. 
+The **QuakeT** is installed with the procedure described in the following. 
 Note that this procedure implies the installation of the OpenQuake engine. 
 It was tested on **Windows**, **Mac OS** and **Linux** systems.
 
-Here we demonstrate the installation of the quakeT for a Windows system and Python 3.12.
+Here we demonstrate the installation of the QuakeT for a Windows system and Python 3.12.
 
 * Open a terminal and move to the folder where you intend to install the tools;
 * Upgrade pip:
@@ -31,7 +31,7 @@ Here we demonstrate the installation of the quakeT for a Windows system and Pyth
 
     >openquake/script/activate
 
-* Go to the folder where you cloned the quakeT repository and complete the installation running the following commands, making sure to replace `requirements.txt` with the name of the file corresponding to the correct python version and operating system:
+* Go to the folder where you cloned the QuakeT repository and complete the installation running the following commands, making sure to replace `requirements.txt` with the name of the file corresponding to the correct python version and operating system:
 
 .. code-block:: ini
     
