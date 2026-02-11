@@ -32,6 +32,7 @@ Currently the QuakeT includes five sub-modules:
    contents/gmc
    contents/site
    contents/case
+   contents/tutorial/test.ipynb
 
 
 Indices and tables
