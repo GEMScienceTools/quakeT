@@ -14,6 +14,7 @@ the open-source hazard and risk calculation engine developed primarily by the GE
 Currently the QuakeT includes five sub-modules:
 
 * **Auxiliary module** contains tools preparing the input to MCQsim and post-processing the output;
+   contents/tutorial/test.ipynb
 
 * **Seismic source module** will contain codes for evaluating models related to seismic sources;
 
@@ -32,7 +33,7 @@ Currently the QuakeT includes five sub-modules:
    contents/gmc
    contents/site
    contents/case
-   contents/tutorial/test.ipynb
+   contents/tutorials
 
 
 Indices and tables
