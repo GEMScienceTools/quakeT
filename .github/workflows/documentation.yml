@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt-get install pandoc
           python -m pip install --upgrade pip
-          pip install sphinx sphinx_rtd_theme myst_parser nbsphinx recommonmark
+          pip install sphinx sphinx_rtd_theme myst_parser nbsphinx recommonmark nbsphinx-link pandas ipykernel
       - name: Sphinx build
         run: |
           sphinx-build doc _build
