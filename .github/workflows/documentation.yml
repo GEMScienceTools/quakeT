@@ -10,15 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
       - name: Install dependencies
         run: |
           sudo apt-get install pandoc
           python -m pip install --upgrade pip
-          pip install sphinx sphinx_rtd_theme myst_parser nbsphinx recommonmark
+          pip install docutils==0.20.1
+          pip install sphinx==7.1.2 sphinx_rtd_theme myst_parser nbsphinx nbsphinx-link pandas ipykernel
+
       - name: Sphinx build
         run: |
-          sphinx-build doc _build
+          sphinx-build -v doc _build
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

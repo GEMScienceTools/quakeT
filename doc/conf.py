@@ -11,9 +11,12 @@ copyright = 'GEM Foundation and Électricité de France'
 author = 'GEM Foundation and Électricité de France'
 release = '0.1'
 
-
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+import os
+import sys
+import shutil
 
 extensions = [
   'sphinx.ext.todo',
@@ -21,16 +24,21 @@ extensions = [
   'sphinx.ext.mathjax',
   'sphinx.ext.viewcode',
   'sphinx.ext.githubpages',
-  'recommonmark',
-  'nbsphinx'
+  'sphinx_rtd_theme',
+  'myst_parser',
+  'nbsphinx',
+  'nbsphinx_link',
 ]
 
+nbsphinx_allow_errors = True
+nbsphinx_execute = 'never'
+
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 #html_static_path = ['_static']

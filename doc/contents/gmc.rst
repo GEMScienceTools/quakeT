@@ -1,8 +1,11 @@
-Ground motion module
+Ground Motion Module
 ################################
 
 The *ground motion module* will contain functionalities for computing ground motion parameters 
 using ground-motion models (GMMs) implemented into the OQ Engine. 
+
+
+In progress..
 
 
 

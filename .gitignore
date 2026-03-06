@@ -69,7 +69,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+doc/_build/
 
 # PyBuilder
 .pybuilder/
@@ -135,6 +135,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+quaket_env/
 
 # Spyder project settings
 .spyderproject

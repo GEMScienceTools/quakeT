@@ -1,51 +1,27 @@
-Auxiliary module
+Auxiliary Module
 ################################
 
-The :index:`auxiliary` module contains functionalities for preparing input and processing outputs of various simulations.
+The :index:`auxiliary` module contains corollary functions that support the capabilities of the 
+platform's core modules (e.g., the source, ground-motion, and site-response modules).
+This module, therefore, acts as a bridge between raw data and the functions available in the simulation platform 
+by supporting I/O tools, statistical analysis, visualisation, and data management.
 
-In particular, it provides:
+Currently, the Auxiliary Module includes functions underpinning the Seismic Source Module 
+and its associated case study. 
 
-- Tools for preparing the input to MCQsim and post-processing the output.
+However, as the project will progress to ground motion and site modules, new functionalities 
+will be integrated into this framework. Consequently, this task will remain active throughout 
+the project, enabling continuous updates and refinements in response to the platform's evolving 
+requirements.
 
-Pre-simulation
-*********************************************
+To ensure a structured development process, the module is, for time being, subdivided into 
+three primary sub-sections: catalogue processing, statistical tools - plotting, and spatial 
+distributions.
 
-The pre-simulation tool focuses on preparing and managing input information.
-Its core functionalities include:
+Tutorial Contents
+-----------------
 
-- **Fault information management**: 
-  Import and modify fault segment data stored in GeoJSON format, including geometrical and attribute handling;
+.. toctree::
+   :maxdepth: 1
 
-- **Geometry validation**: 
-  Check and validate the geometric consistency of fault segments to ensure accurate meshing and simulation;
-
-- **Triangular meshing**:
-  Generate triangular meshes based on the fault geometry, enabling detailed structural representation;
-
-- **STL file creation**:
-  Convert the meshed fault segments into STL (Stereolithography or Standard Triangle Language) file format, 
-  suitable for 3D visualization and numerical simulations;
-
-
-Post simulation
-*********************************************
-
-The post-simulation tool focuses on processing output results.
-Its core functionalities include:
-
-- **Catalog processing**: 
-  Load catalogue as a `.mat` file and save it as a `.csv` file;
-
-- **Statistical evaluation**: 
-  Compute statistics for magnitude, rupture area, mean slip, and mean stress drop;
-
-- **3D spatial visualization**: 
-  Visualize spatial distribution of events;
-
-- **Magnitude-frequency distribution (MFD)**: 
-  Generate MFDs of the simulated earthquake catalogue;
-
-
-PSHA
-*********************************************
-
+   ses_processing
