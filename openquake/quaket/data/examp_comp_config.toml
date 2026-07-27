@@ -1,0 +1,22 @@
+[completeness]
+num_steps = 0
+step = 8
+flexible = true
+mags = [ 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5,]
+years = [ 1905, 1920, 1940, 1960, 1980, 2000, 2020,]
+ref_mag = 4.5
+ref_upp_mag = 10.0
+bmin = 0.5
+bmax = 1.5
+last_year = 2020
+optimization_criterion = "optimize"
+
+[sources.it]
+completeness_table = [ [ 1980.0, 5.0,], [ 1940.0, 6.5,], [ 1905.0, 7.0,],]
+agr_weichert = 6.10619
+bgr_weichert = 1.1233
+agr_sig_weichert = 0.03665
+bgr_sig_weichert = 0.09372
+rmag = 5.0
+rmag_rate = 3.08806
+rmag_rate_sig = 0.271888

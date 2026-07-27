@@ -1,8 +1,8 @@
 Installation
 ################################
 
-This guide covers the necessary steps to set up your environment for the **Simulation Platform**. You will need to install Python dependencies and system-level tools like the Generic Mapping Tools (GMT).
-Also, the tutorials rely on the **OpenQuake Model Building Toolkit (oq-mbtk)** for seismic catalogue processing and statistical analysis. Before proceeding, you must have ``oq-mbtk`` installed.
+This guide covers the necessary steps to set up your environment for the **Simulation Platform**. You will need to install Python dependencies and system-level tools like the Generic Mapping Tools (GMT) :ref:`[2] <ref-wessel-2019>`.
+Also, the tutorials rely on the `OpenQuake engine <https://github.com/gem/oq-engine>`_ and `OpenQuake Model Building Toolkit (oq-mbtk) <https://github.com/GEMScienceTools/oq-mbtk/tree/master>`_. Before proceeding, you must have ``OpenQuake engine`` and ``oq-mbtk`` installed.
 
 Here we demonstrate the installation of the QuakeT and its necessary dependencies, respectively. 
 
@@ -23,8 +23,13 @@ Go to the folder where you cloned the QuakeT repository and make it in “editab
 
     pip install -e .
 
+OpenQuake engine Setup
+======================
+Please follow the official installation instructions of **OpenQuake Engine** here:
+`OpenQuake engine Installation Guide. <https://docs.openquake.org/oq-engine/manual/latest/getting-started/index.html#getting-started>`_
+
 OpenQuake MBTK Setup
-========================
+====================
 Please follow the official installation instructions of **oq-mbtk** here:
 `OpenQuake MBTK Installation Guide. <https://gemsciencetools.github.io/oq-mbtk/contents/installation.html>`_
 
