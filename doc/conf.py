@@ -19,6 +19,8 @@ import sys
 import shutil
 
 extensions = [
+  'sphinx.ext.autodoc',
+  'sphinx.ext.intersphinx',
   'sphinx.ext.todo',
   'sphinx.ext.coverage',
   'sphinx.ext.mathjax',
@@ -27,11 +29,12 @@ extensions = [
   'sphinx_rtd_theme',
   'myst_parser',
   'nbsphinx',
-  'nbsphinx_link',
+  'nbsphinx_link'
 ]
 
 nbsphinx_allow_errors = True
 nbsphinx_execute = 'never'
+default_role = 'term'
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
