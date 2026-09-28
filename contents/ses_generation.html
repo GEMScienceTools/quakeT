@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stochastic Events Set Generation &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ground Motion Module" href="gmc.html" />
+    <link rel="prev" title="Evenly Discretised Magnitude-Frequency Distribution (MFD)" href="mfd_calculation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ssc.html">Seismic Source Module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ssc.html#understanding-event-based-psha">Understanding Event-Based PSHA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssc.html#generating-stochastic-event-sets-ses">Generating Stochastic Event Sets (SES)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ssc.html#tutorial-contents">Tutorial Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mfd_calculation.html">Evenly Discretised Magnitude-Frequency Distribution (MFD)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Stochastic Events Set Generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ssc.html">Seismic Source Module</a></li>
+      <li class="breadcrumb-item active">Stochastic Events Set Generation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/ses_generation.nblink.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Stochastic-Events-Set-Generation">
+<h1>Stochastic Events Set Generation<a class="headerlink" href="#Stochastic-Events-Set-Generation" title="Permalink to this heading"></a></h1>
+<p>This notebook shows how to generate a stochastic event set from an <a class="reference external" href="https://github.com/gem/oq-engine/blob/master/openquake/hazardlib/source/area.py#L25">OQ Engine area source</a> with known geometry (i.e. a polygon in a shapefile or geojson), a <a class="reference external" href="https://github.com/gem/oq-engine/tree/master/openquake/hazardlib/mfd">magnitude-frequency distribution (MFD)</a>, and a hypocentral depth distribution (optionally specified by means of an <a class="reference external" href="https://github.com/gem/oq-engine/blob/master/openquake/hazardlib/pmf.py#L24">OQ Engine probability mass
+function</a>).</p>
+<p>For a simple and straightforward SES generation, we develop a couple of functionalities in <a class="reference external" href="https://github.com/GEMScienceTools/oq-mbtk/tree/master/openquake/man/ses_utils">openquake.man.ses_utils</a>. If you prefer to perform full SES generation, you might follow the event-based PSHA calculation described in the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/ssc.html">Seismic Source Module</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.man.ses_utils.ses_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">ses_from_area_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hazardlib.pmf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PMF</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hazardlib.mfd</span><span class="w"> </span><span class="kn">import</span> <span class="n">TruncatedGRMFD</span>
+</pre></div>
+</div>
+</div>
+<p>To generate SES with this workflow, first you need to determine which MFD you will use. Here, we prefer to use <code class="docutils literal notranslate"><span class="pre">TruncatedGRMFD</span></code> to show another MFD than previously showed one in the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/mfd_calculation.html">first notebook</a>.</p>
+<p>This distribution is described by means of a minimum <code class="docutils literal notranslate"><span class="pre">minMag</span></code> and maximum magnitude <code class="docutils literal notranslate"><span class="pre">maxMag</span></code> and by the <span class="math notranslate nohighlight">\(a-\)</span> and <span class="math notranslate nohighlight">\(b-\)</span>values of the Gutenberg-Richter relationship.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">magnitude_step</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">magnitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">4.1</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="n">magnitude_step</span><span class="p">)</span>
+<span class="n">rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">magnitudes</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">mfd</span> <span class="o">=</span> <span class="n">TruncatedGRMFD</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c1"># min_mag, max_mag, bin_width, a_val, b_val</span>
+</pre></div>
+</div>
+</div>
+<p>The figure below shows the MFD obtained using the parameters of the considered example.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">magnitudes</span><span class="p">,</span> <span class="n">rates</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">magnitude_step</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Magnitude, m'</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Rates [ev/yr]'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/contents_ses_generation_5_0.png" src="../_images/contents_ses_generation_5_0.png" />
+</div>
+</div>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">ses_from_area_source</span></code> utility to produce 1000 years SES by sampling earthquake ruptures from configured seismic sources using Monte Carlo sampling <a class="reference external" href="references.html#ref-musson-1999">[16]</a>.</p>
+<p>Apart from MFD, you need to define:</p>
+<ul class="simple">
+<li><p>an area source as a polygon file described in the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/data_formats.html#source-polygon">Data Format section</a>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hdd</span></code> which is an instance of :class:<code class="docutils literal notranslate"><span class="pre">openquake.hazardlib.pmf.PMF</span></code> describing the hypocentral depth distribution.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the stochastic event set, i.e. a set of ruptures</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">"../data/poly.geojson"</span>
+<span class="n">hdd</span> <span class="o">=</span> <span class="n">PMF</span><span class="p">([(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)])</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">ses_from_area_source</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">mfd</span><span class="p">,</span> <span class="n">hdd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ses</span><span class="p">:</span>
+    <span class="n">real_rupture</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">rupture</span>
+    <span class="n">hypo</span> <span class="o">=</span> <span class="n">real_rupture</span><span class="o">.</span><span class="n">hypocenter</span>
+
+    <span class="n">df_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">"rupture_id"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s2">"magnitude"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">mag</span><span class="p">,</span>
+        <span class="s2">"longitude"</span><span class="p">:</span> <span class="n">hypo</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+        <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">hypo</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+        <span class="s2">"depth"</span><span class="p">:</span> <span class="n">hypo</span><span class="o">.</span><span class="n">depth</span><span class="p">,</span>
+        <span class="s2">"tectonic_region"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">tectonic_region_type</span>
+    <span class="p">})</span>
+
+<span class="n">df_ses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_data</span><span class="p">)</span>
+<span class="n">df_ses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1">#Save</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"../output/ses_generation"</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">csv_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"stochastic_event_set.csv"</span><span class="p">)</span>
+<span class="n">df_ses</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_file_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Done! Saved to: </span><span class="si">{</span><span class="n">csv_file_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Done! Saved to: ../output/ses_generation/stochastic_event_set.csv
+</pre></div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mfd_calculation.html" class="btn btn-neutral float-left" title="Evenly Discretised Magnitude-Frequency Distribution (MFD)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gmc.html" class="btn btn-neutral float-right" title="Ground Motion Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

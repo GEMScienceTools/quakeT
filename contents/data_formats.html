@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Formats &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Auxiliary Module" href="auxiliary.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stochastic-event-set">Stochastic Event Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stochastic-rupture-set">Stochastic Rupture Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#catalogue">Catalogue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-polygon">Source Polygon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#completeness-configuration">Completeness Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssc.html">Seismic Source Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data Formats</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/data_formats.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-formats">
+<h1>Data Formats<a class="headerlink" href="#data-formats" title="Permalink to this heading"></a></h1>
+<p>The <em>Data Formats</em> section provides supported input formats and their descriptions that will be used in the simulation platform.</p>
+<section id="stochastic-event-set">
+<h2>Stochastic Event Set<a class="headerlink" href="#stochastic-event-set" title="Permalink to this heading"></a></h2>
+<p>The event output generated by the <a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/user-guide/workflows/event-based-psha.html">OpenQuake (OQ) Engine event-based PSHA calculation workflow</a> includes the following columns:</p>
+<p><em>List of columns in the event set</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>event_id</p></td>
+<td><p>A unique identifier (integer) for each earthquake in the catalogue</p></td>
+</tr>
+<tr class="row-odd"><td><p>rup_id</p></td>
+<td><p>Incremental number identifying the rupture</p></td>
+</tr>
+<tr class="row-even"><td><p>rlz_id</p></td>
+<td><p>A unique identifier (integer) for the logic-tree realization associated with the event</p></td>
+</tr>
+<tr class="row-odd"><td><p>year</p></td>
+<td><p>Year of event (integer)</p></td>
+</tr>
+<tr class="row-even"><td><p>ses_id</p></td>
+<td><p>A unique identifier (integer) for the stochastic event set simulation to which the event belongs</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="stochastic-rupture-set">
+<h2>Stochastic Rupture Set<a class="headerlink" href="#stochastic-rupture-set" title="Permalink to this heading"></a></h2>
+<p>The rupture output generated by the <a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/user-guide/workflows/event-based-psha.html">OpenQuake (OQ) Engine event-based PSHA calculation workflow</a> includes the following columns:</p>
+<p><em>List of columns in the rupture set</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>rup_id</p></td>
+<td><p>A unique identifier (integer) for each rupture</p></td>
+</tr>
+<tr class="row-odd"><td><p>source_id</p></td>
+<td><p>A unique identifier (integer or string) for the seismic source generating the rupture</p></td>
+</tr>
+<tr class="row-even"><td><p>multiplicity</p></td>
+<td><p>How many times the rupture occurs in the effective investigation time</p></td>
+</tr>
+<tr class="row-odd"><td><p>mag</p></td>
+<td><p>Float specifying the magnitude of the rupture</p></td>
+</tr>
+<tr class="row-even"><td><p>centroid_lon</p></td>
+<td><p>Longitude of the centroid of the rupture</p></td>
+</tr>
+<tr class="row-odd"><td><p>centroid_lat</p></td>
+<td><p>Latitude of the centroid of the rupture</p></td>
+</tr>
+<tr class="row-even"><td><p>centroid_depth</p></td>
+<td><p>Depth (in km) of the centroid of the rupture</p></td>
+</tr>
+<tr class="row-odd"><td><p>trt</p></td>
+<td><p>String specifying the tectonic region type</p></td>
+</tr>
+<tr class="row-even"><td><p>strike</p></td>
+<td><p>Strike angle of the rupture surface</p></td>
+</tr>
+<tr class="row-odd"><td><p>dip</p></td>
+<td><p>Dip angle of the rupture surface</p></td>
+</tr>
+<tr class="row-even"><td><p>rake</p></td>
+<td><p>Rake angle of the rupture surface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="catalogue">
+<h2>Catalogue<a class="headerlink" href="#catalogue" title="Permalink to this heading"></a></h2>
+<p>GEM Hazard Modeller’s Tookit (hmtk) .csv format <a class="reference internal" href="references.html#ref-weatherill-2014"><span class="std std-ref">[1]</span></a> is the main catalogue format used in the simulation platform. It includes the following columns:</p>
+<p><em>List of Attributes in the Earthquake Catalogue File (* Indicates Essential)</em></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>eventID*</p></td>
+<td><p>A unique identifier (integer) for each earthquake in the catalogue</p></td>
+</tr>
+<tr class="row-odd"><td><p>Agency</p></td>
+<td><p>The code (string) of the recording agency for the event solution</p></td>
+</tr>
+<tr class="row-even"><td><p>year*</p></td>
+<td><p>Year of event (integer) in the range -10000 to present
+(events before common era (BCE) should have a negative value)</p></td>
+</tr>
+<tr class="row-odd"><td><p>month*</p></td>
+<td><p>Month of event (integer)</p></td>
+</tr>
+<tr class="row-even"><td><p>day*</p></td>
+<td><p>Day of event (integer)</p></td>
+</tr>
+<tr class="row-odd"><td><p>hour*</p></td>
+<td><p>Hour of event (integer) - if unknown then set to 0</p></td>
+</tr>
+<tr class="row-even"><td><p>minute*</p></td>
+<td><p>Minute of event (integer) - if unknown then set to 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>second*</p></td>
+<td><p>Second of event (float) - if unknown set to 0.0</p></td>
+</tr>
+<tr class="row-even"><td><p>timeError</p></td>
+<td><p>Error in event time (float)</p></td>
+</tr>
+<tr class="row-odd"><td><p>longitude*</p></td>
+<td><p>Longitude of event, in decimal degrees (float)</p></td>
+</tr>
+<tr class="row-even"><td><p>latitude*</p></td>
+<td><p>Latitude of event, in decimal degrees (float)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SemiMajor90</p></td>
+<td><p>Length (km) of the semi-major axis of the 90 % confidence ellipsoid for location error (float)</p></td>
+</tr>
+<tr class="row-even"><td><p>SemiMinor90</p></td>
+<td><p>Length (km) of the semi-minor axis of the 90 % confidence ellipsoid for location error (float)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ErrorStrike</p></td>
+<td><p>Azimuth (in degrees) of the 90 % confidence ellipsoid for location error (float)</p></td>
+</tr>
+<tr class="row-even"><td><p>depth*</p></td>
+<td><p>Depth (km) of earthquake (float)</p></td>
+</tr>
+<tr class="row-odd"><td><p>depthError</p></td>
+<td><p>Uncertainty (as standard deviation) in earthquake depth (km) (float)</p></td>
+</tr>
+<tr class="row-even"><td><p>magnitude*</p></td>
+<td><p>Homogenised magnitude of the event (float) - typically Mw</p></td>
+</tr>
+<tr class="row-odd"><td><p>sigmaMagnitude</p></td>
+<td><p>Uncertainty on the homogenised magnitude (float) typically Mw</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="source-polygon">
+<h2>Source Polygon<a class="headerlink" href="#source-polygon" title="Permalink to this heading"></a></h2>
+<p>Standard GeoJSON format is used to define source zones or study areas. The example below shows a polygon structure used to represent a tectonic or seismic zone.</p>
+<div class="literal-block-wrapper docutils container" id="geojson-polygon">
+<div class="code-block-caption"><span class="caption-text">Example GeoJSON Polygon Structure</span><a class="headerlink" href="#geojson-polygon" title="Permalink to this code"></a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">[</span>
+<span class="w">            </span><span class="p">[</span>
+<span class="w">              </span><span class="p">[</span><span class="mf">-3.9115</span><span class="p">,</span><span class="w"> </span><span class="mf">43.5650</span><span class="p">],</span>
+<span class="w">              </span><span class="p">[</span><span class="mf">-3.8500</span><span class="p">,</span><span class="w"> </span><span class="mf">43.5650</span><span class="p">],</span>
+<span class="w">              </span><span class="p">[</span><span class="mf">-3.8500</span><span class="p">,</span><span class="w"> </span><span class="mf">43.5200</span><span class="p">],</span>
+<span class="w">              </span><span class="p">[</span><span class="mf">-3.9115</span><span class="p">,</span><span class="w"> </span><span class="mf">43.5200</span><span class="p">],</span>
+<span class="w">              </span><span class="p">[</span><span class="mf">-3.9115</span><span class="p">,</span><span class="w"> </span><span class="mf">43.5650</span><span class="p">]</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">          </span><span class="p">]</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="completeness-configuration">
+<h2>Completeness Configuration<a class="headerlink" href="#completeness-configuration" title="Permalink to this heading"></a></h2>
+<p>A completeness parameter configuration file supplied as a .toml file. The toml file will set up parameters
+for completeness step and be modified while running the code. The configuration toml is created by the modeller.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Example toml configuration for completeness</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[completeness]</span>
+<span class="n">num_steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
+<span class="n">mags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.5</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0</span><span class="p">,</span><span class="w"> </span><span class="mf">6.5</span><span class="p">,</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span><span class="w"> </span><span class="mf">7.5</span><span class="p">,]</span>
+<span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1905</span><span class="p">,</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="mi">1940</span><span class="p">,</span><span class="w"> </span><span class="mi">1960</span><span class="p">,</span><span class="w"> </span><span class="mi">1980</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">2020</span><span class="p">,]</span>
+<span class="n">ref_mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.5</span>
+<span class="n">ref_upp_mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span>
+<span class="n">bmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">bmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span>
+<span class="n">last_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
+<span class="n">optimization_criterion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"optimize"</span>
+
+<span class="k">[sources.id]</span>
+</pre></div>
+</div>
+</div>
+<p>Underneath these settings, we have headers for the source. By running the workflow,
+we will add information of completeness and MFD parameters. The parameters inside the toml file
+are described below.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">num_steps</span></code>: Sets preferred number of steps in window.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code>: Steps is used for parallelisation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mags</span></code>: List of candidate completeness magnitudes considered in the analysis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">years</span></code>: List of candidate years at which catalogue completeness may have changed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref_mag</span></code>: Reference minimum magnitude used in the Gutenberg–Richter analysis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref_upp_mag</span></code>: Upper reference magnitude limit considered in the analysis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bmin</span></code>: Minimum allowable Gutenberg–Richter b-value during optimization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bmax</span></code>: Maximum allowable Gutenberg–Richter b-value during optimization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_year</span></code>: Final year of the catalogue used in the completeness analysis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimization_criterion</span></code>: Options for norm (e.g., “Optimize” or “Poisson”)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="auxiliary.html" class="btn btn-neutral float-right" title="Auxiliary Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

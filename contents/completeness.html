@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Completeness &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Declustering" href="declustering.html" />
+    <link rel="prev" title="Magnitude Homogenization" href="homogenising.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="auxiliary.html#ssm-tutorial-contents">SSM Tutorial Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ses.html">Stochastic Earthquake Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="catalogue.html">Catalogue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homogenising.html">Magnitude Homogenization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Completeness</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Stepp,-1971">Stepp, 1971</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Jointly-estimating-completeness-and-MFD-parameters-for-PSHA">Jointly estimating completeness and MFD parameters for PSHA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="declustering.html">Declustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interevent.html">Poisson Stationarity Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mfd.html">Gutenberg-Richter Recurrence Model Fitting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ssc.html">Seismic Source Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="auxiliary.html">Auxiliary Module</a></li>
+      <li class="breadcrumb-item active">Completeness</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/completeness.nblink.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Completeness">
+<h1>Completeness<a class="headerlink" href="#Completeness" title="Permalink to this heading"></a></h1>
+<p>In the early stages of processing an <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Instrumental-catalogue">instrumental catalogue</a> for use in <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Probabilistic-Seismic-Hazard-Analysis-PSHA">Probabilistic Seismic Hazard Analysis (PSHA)</a>, it is necessary to determine the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Magnitude-completeness-Mc">magnitude completeness (Mc)</a> of
+the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Earthquake-catalogue">earthquake catalogue</a>. Incomplete catalogues can introduce bias into earthquake recurrence models, which may significantly affect seismic hazard estimates at a site. Therefore, identifying Mc is an essential step in preparing input data for PSHA.</p>
+<p>In this notebook, two catalogue completeness methodologies are presented: the Stepp (1971) method <a class="reference external" href="references.html#ref-stepp-1972">[7]</a> and an iterative approach <a class="reference external" href="references.html#ref-johnson-2026">[8]</a>. The methodology for analysing catalogue completeness is implemented in the current version of the Modeller’s Toolkit <a class="reference external" href="references.html#ref-weatherill-2014">[1]</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hmtk.parsers.catalogue.csv_catalogue_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">CsvCatalogueParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hmtk.seismicity.completeness.comp_stepp_1971</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stepp1971</span>
+</pre></div>
+</div>
+</div>
+<section id="Stepp,-1971">
+<h2>Stepp, 1971<a class="headerlink" href="#Stepp,-1971" title="Permalink to this heading"></a></h2>
+<p>This is one of the earliest analytical approaches to estimation of <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Magnitude-completeness-Mc">magnitude completeness</a>. It is based on estimators of the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Seismicity-rate">seismicity rate</a>, identifying the completeness magnitude when the observed rate of earthquakes above Mc begins to deviate from the expected rate.</p>
+<p>The analysis of Stepp (1971) is a coarse, but relatively robust, approach to estimating the temporal variation in completeness of a catalogue. It has been widely applied since its development. The accuracy of the Mc depends on the magnitude and time intervals considered, and a degree of judgement is often needed to determine the time at which the rate deviates from the expected values. It has tended to be applied to catalogues on a large scale and for relatively higher Mc.</p>
+<p>In this section, you need an HMTK format earthquake catalogue including the necessary columns described <a class="reference external" href="../../contents/data_formats.html">here</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catalogue</span> <span class="o">=</span> <span class="n">CsvCatalogueParser</span><span class="p">(</span><span class="s2">"../data/cat_it.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">read_file</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Catalogue Attribute source_cat is not a recognised catalogue key
+Catalogue Attribute depth_orig is not a recognised catalogue key
+Catalogue Attribute winGT_fs01 is not a recognised catalogue key
+Catalogue Attribute winGK_fs01 is not a recognised catalogue key
+Catalogue Attribute rb_rfact10 is not a recognised catalogue key
+Catalogue Attribute rb_rfact20 is not a recognised catalogue key
+Catalogue Attribute rb_rfact30 is not a recognised catalogue key
+Catalogue Attribute Date is not a recognised catalogue key
+</pre></div></div>
+</div>
+<p>To run the <code class="docutils literal notranslate"><span class="pre">Stepp1971</span></code> algorithm, the configuration parameters, described below, should be entered in the form of a dictionary, such as the example shown in the snippet below:</p>
+<ul class="simple">
+<li><p><strong>time_bin:</strong> the size of the time window in years,</p></li>
+<li><p><strong>magnitude_bin:</strong> the size of the magnitude bin,</p></li>
+<li><p><strong>increment_lock:</strong> (optional) is used to ensure consistency in the results to avoid the Mc increasing for the latest intervals in the catalogue simply due to the variability associated with the short duration. <code class="docutils literal notranslate"><span class="pre">True</span></code> means the program will ensure that the completeness magnitude for shorter, more recent windows is less than or equal to that of older, longer windows. <code class="docutils literal notranslate"><span class="pre">False</span></code> is to show the apparent variability.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comp_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'magnitude_bin'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+               <span class="s1">'time_bin'</span><span class="p">:</span> <span class="mf">5.</span><span class="p">,</span>
+               <span class="s1">'increment_lock'</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">completeness_algorithm</span> <span class="o">=</span> <span class="n">Stepp1971</span><span class="p">()</span>
+<span class="n">completeness_table</span> <span class="o">=</span> <span class="n">completeness_algorithm</span><span class="o">.</span><span class="n">completeness</span><span class="p">(</span><span class="n">catalogue</span><span class="p">,</span> <span class="n">comp_config</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Completeness Table (Year, Magnitude):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">completeness_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Completeness Table (Year, Magnitude):
+[[1973.     3.5]
+ [1959.     4. ]
+ [1942.     4.5]
+ [1835.     5. ]
+ [1798.     5.5]
+ [1672.     6. ]
+ [1548.     6.5]
+ [1548.     7. ]]
+</pre></div></div>
+</div>
+<p>As shown in the resulting <code class="docutils literal notranslate"><span class="pre">completeness_table</span></code>, the completeness algorithm provides the temporal variation of completeness (in this case with <code class="docutils literal notranslate"><span class="pre">increment_lock</span></code> enabled) as a two-column table. The first column represents the completeness year, while the second column gives the central magnitude value of the corresponding magnitude bin.</p>
+</section>
+<section id="Jointly-estimating-completeness-and-MFD-parameters-for-PSHA">
+<h2>Jointly estimating completeness and MFD parameters for PSHA<a class="headerlink" href="#Jointly-estimating-completeness-and-MFD-parameters-for-PSHA" title="Permalink to this heading"></a></h2>
+<p>Next, a new completeness methodology (in the preparation process by Johnson et al., 2026 <a class="reference external" href="references.html#ref-johnson-2026">[8]</a>) is introduced.</p>
+<p>They develop a technique to simultaneously estimate <span class="math notranslate nohighlight">\(b\)</span>-values and time-magnitude completeness windows that relies upon one of two regularly made assumptions about event distributions in a study region: that the magnitudes in the catalogue follow a Gutenberg-Richter magnitude distribution and that the rate of events in time follows a Poisson distribution.</p>
+<p>In this methodology, there are two supplementary techniques to determine completeness and <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-MagnitudeFrequency-Distribution-MFD">magnitude-frequency distribution (MFD)</a> parameters such that the two assumptions can trade-off. The two approaches are based on the same fundamental principles, but they differ in the metric used to determine the optimal combined solution. Their automated method enables users to choose multiple
+potential completeness magnitudes and corresponding years, while the final selection is determined by a statistical algorithm designed to satisfy a key principle of PSHA. However, if users already have reliable knowledge of the completeness characteristics of their catalogue, they can restrict the range of magnitudes and years considered.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../data"</span><span class="p">)</span>
+<span class="n">catalogue</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">"cat_it.csv"</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">"examp_comp_config.toml"</span><span class="p">)</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">".."</span><span class="p">,</span> <span class="s2">"output"</span><span class="p">,</span> <span class="s2">"comp_out"</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Change the working directory to the OUTPUT folder to save everything there</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">completeness_generate</span></code> function uses the completeness-related data provided in the <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/data_formats.html#completeness-configuration">TOML configuration</a> file. It first reads the defined <code class="docutils literal notranslate"><span class="pre">years</span></code> and <code class="docutils literal notranslate"><span class="pre">mags</span></code> values, which should be selected based on available knowledge of the catalogue and the periods during which completeness might have changed. In the initial step, the function generates all possible completeness windows from the
+provided years and magnitude values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">"oqm cat completeness_generate </span><span class="si">{</span><span class="n">config</span><span class="si">}</span><span class="s2"> ."</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:numexpr.utils:NumExpr defaulting to 14 threads.
+WARNING:root:`step` parameter deprecated. Use `_n_vals_per_iter` instead.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Total number of combinations : 823,543
+Index of first magnitude     : 0
+Number of vals per iteration : 8
+[2020 2000 1980 1960 1940 1920 1905]
+Total number selected        : 1,716
+Saving completeness tables in: .
+Time taken {}:  -3.1534200830010377
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CompletedProcess(args=&#39;oqm cat completeness_generate /Users/fahrettinkuran/quakeT/openquake/quaket/data/examp_comp_config.toml .&#39;, returncode=0)
+</pre></div></div>
+</div>
+<p>Once all possible completeness tables have been generated, the next step is to perform the analysis. The <code class="docutils literal notranslate"><span class="pre">completeness_analysis</span></code> function first verifies whether the catalogue is compatible with each completeness table, ensuring that completeness increases with time and that each bin contains a sufficient number of events. It then calculates the Gutenberg–Richter (GR) occurrence parameters, namely the <span class="math notranslate nohighlight">\(a\)</span>- and <span class="math notranslate nohighlight">\(b\)</span>-value.</p>
+<p>To perform the completeness analysis, we specify the locations of the previously prepared catalogues along with an output directory where the completeness results will be stored. The optimal completeness is then selected according to a norm defined in the configuration file through the <code class="docutils literal notranslate"><span class="pre">optimization_criterion</span></code>. For each possible completeness window, the corresponding norm value is computed. In this example, the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> criterion is used, which identifies the preferred completeness model
+by minimizing the difference between the observed and expected MFDs associated with the tested completeness windows.</p>
+<p>It should be noted that this step can be computationally demanding. If the catalogue contains a large number of events and/or many completeness-window combinations are evaluated, the analysis may require several minutes to complete, and substantially longer for very large catalogues.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">"oqm cat completeness_analysis </span><span class="si">{</span><span class="n">catalogue</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">config</span><span class="si">}</span><span class="s2"> . . completeness_results"</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:numexpr.utils:NumExpr defaulting to 14 threads.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Reading completeness data from: .
+Catalogue Attribute source_cat is not a recognised catalogue key
+Catalogue Attribute depth_orig is not a recognised catalogue key
+Catalogue Attribute winGT_fs01 is not a recognised catalogue key
+Catalogue Attribute winGK_fs01 is not a recognised catalogue key
+Catalogue Attribute rb_rfact10 is not a recognised catalogue key
+Catalogue Attribute rb_rfact20 is not a recognised catalogue key
+Catalogue Attribute rb_rfact30 is not a recognised catalogue key
+Catalogue Attribute Date is not a recognised catalogue key
+
+SOURCE: it
+Catalogue contains 2629 events equal or above 4.5
+starting norm =  1
+Iteration: 01715 norm: 2.492893e-03
+Index of selected permutation : 677
+Maximum annual rate for 4.5   : -1.0000
+GR a and b                    : 6.1062 1.1233
+Completeness:
+ [[1980.     5. ]
+ [1940.     6.5]
+ [1905.     7. ]]
+{&#39;complete&#39;: 16, &#39;warning&#39;: 0, &#39;else&#39;: 64, &#39;early&#39;: 0}
+Updated /Users/fahrettinkuran/quakeT/openquake/quaket/data/examp_comp_config.toml
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CompletedProcess(args=&#39;oqm cat completeness_analysis /Users/fahrettinkuran/quakeT/openquake/quaket/data/cat_it.csv /Users/fahrettinkuran/quakeT/openquake/quaket/data/examp_comp_config.toml . . completeness_results&#39;, returncode=0)
+</pre></div></div>
+</div>
+<p>It may also be useful to examine plots of event density over time together with the selected completeness model. Such plots can be generated with the <code class="docutils literal notranslate"><span class="pre">plot_completeness_data</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">"oqm wkf plot_completeness_data </span><span class="si">{</span><span class="n">catalogue</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">config</span><span class="si">}</span><span class="s2"> ."</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:numexpr.utils:NumExpr defaulting to 14 threads.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Catalogue Attribute source_cat is not a recognised catalogue key
+Catalogue Attribute depth_orig is not a recognised catalogue key
+Catalogue Attribute winGT_fs01 is not a recognised catalogue key
+Catalogue Attribute winGK_fs01 is not a recognised catalogue key
+Catalogue Attribute rb_rfact10 is not a recognised catalogue key
+Catalogue Attribute rb_rfact20 is not a recognised catalogue key
+Catalogue Attribute rb_rfact30 is not a recognised catalogue key
+Catalogue Attribute Date is not a recognised catalogue key
+src_id: it  source specific completeness
+[[1980.     5. ]
+ [1940.     6.5]
+ [1905.     7. ]]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CompletedProcess(args=&#39;oqm wkf plot_completeness_data /Users/fahrettinkuran/quakeT/openquake/quaket/data/cat_it.csv /Users/fahrettinkuran/quakeT/openquake/quaket/data/examp_comp_config.toml .&#39;, returncode=0)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">current_dir</span><span class="p">)</span>
+
+<span class="c1"># Display Results</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".png"</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Done! Saved to: </span><span class="si">{</span><span class="n">img_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">img_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Done! Saved to: ../output/comp_out/fig_mfd_it.png
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/contents_completeness_17_1.png" src="../_images/contents_completeness_17_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Done! Saved to: ../output/comp_out/fig_mtd_it.png
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/contents_completeness_17_3.png" src="../_images/contents_completeness_17_3.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="homogenising.html" class="btn btn-neutral float-left" title="Magnitude Homogenization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="declustering.html" class="btn btn-neutral float-right" title="Declustering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

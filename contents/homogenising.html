@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnitude Homogenization &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Completeness" href="completeness.html" />
+    <link rel="prev" title="Catalogue" href="catalogue.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="auxiliary.html#ssm-tutorial-contents">SSM Tutorial Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ses.html">Stochastic Earthquake Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="catalogue.html">Catalogue</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Magnitude Homogenization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="completeness.html">Completeness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="declustering.html">Declustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interevent.html">Poisson Stationarity Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mfd.html">Gutenberg-Richter Recurrence Model Fitting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ssc.html">Seismic Source Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="auxiliary.html">Auxiliary Module</a></li>
+      <li class="breadcrumb-item active">Magnitude Homogenization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/homogenising.nblink.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Magnitude-Homogenization">
+<h1>Magnitude Homogenization<a class="headerlink" href="#Magnitude-Homogenization" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Magnitude-homogenization">Magnitude Homogenization</a> is one of the fundamental steps in seismic hazard analysis. The process involves combining earthquake data from multiple catalogues into a single consistent <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Earthquake-catalogue">earthquake catalogue</a> by carefully evaluating available bulletins, identifying duplicate events across different sources,
+and applying empirical conversion relationships to transform various native magnitude scales into a common target magnitude scale <a class="reference external" href="references.html#ref-weatherill-2016">[9]</a>.</p>
+<p>There is a <a class="reference external" href="https://github.com/GEMScienceTools/oq-mbtk/blob/master/openquake/cat/isc_homogenisor.py">homogenisor module in oq-mbtk</a> that was developed for the database of the <a class="reference external" href="https://www.isc.ac.uk/">International Seismological Center (ISC)</a>, but can be used for any other compiled database to create a magnitude-homogeneous global <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Earthquake-catalogue">earthquake catalogue</a>. Please note that the module contains not
+only the reviewed and reprocessed time/location (origin) and magnitude solutions for each event, but also the original solutions from all of the contributing local recording networks <a class="reference external" href="references.html#ref-weatherill-2016">[9]</a>. This homogenisor supports several agency-magnitude scales (e.g., <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Surface-wave-magnitude-M-s">surface-wave magnitude</a> (<span class="math notranslate nohighlight">\(M_s\)</span>), <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Body-wave-magnitude-m-b">body-wave
+magnitude</a> (<span class="math notranslate nohighlight">\(m_b\)</span>), and <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Moment-magnitude-M-w">moment magnitude</a> (<span class="math notranslate nohighlight">\(M_w\)</span>)) and converts them to a standardized <span class="math notranslate nohighlight">\(M_w\)</span> using empirical relations based on their hierarchical criteria for selection of origin and magnitude for homogenizing a global earthquake catalogue.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.cat</span><span class="w"> </span><span class="kn">import</span> <span class="n">isc_homogenisor</span>
+</pre></div>
+</div>
+</div>
+<p>Here, we define some case rules for the homogenisation. If you want to know more about <code class="docutils literal notranslate"><span class="pre">isc_homogenisor</span></code> and their rules, please refer to <a class="reference external" href="https://github.com/GEMScienceTools/oq-mbtk/blob/master/openquake/cat/isc_homogenisor.py">homogenisor module in oq-mbtk</a>.</p>
+<p>Briefly, the block below initializes the logic for converting different magnitude scales reported by the <a class="reference external" href="https://www.isc.ac.uk/">International Seismological Center (ISC)</a> into a standardized <span class="math notranslate nohighlight">\(M_w\)</span> using the ISC-GEM methodology.</p>
+<p><strong>Ms rule</strong></p>
+<ul class="simple">
+<li><p>Agency: ISC</p></li>
+<li><p>Model: Converts <span class="math notranslate nohighlight">\(M_s\)</span> to <span class="math notranslate nohighlight">\(M_w\)</span> using the General Orthogonal Regression (GOR) model.</p></li>
+<li><p>Uncertainty: Applies a specific sigma model (<code class="docutils literal notranslate"><span class="pre">ISCGORMs_toGCMTMw_Sigma</span></code>) to track measurement errors.</p></li>
+</ul>
+<p><strong>mb rule</strong></p>
+<ul class="simple">
+<li><p>Agency: ISC</p></li>
+<li><p>Model: Converts <span class="math notranslate nohighlight">\(m_b\)</span> to <span class="math notranslate nohighlight">\(M_w\)</span> using the General Orthogonal Regression (GOR) model tailored for body waves.</p></li>
+<li><p>Uncertainty: Applies the corresponding <span class="math notranslate nohighlight">\(m_b\)</span> sigma model (<code class="docutils literal notranslate"><span class="pre">ISCGORmb_toGCMTMw_Sigma</span></code>) to ensure consistent error propagation.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">homog_rules</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Ms'</span><span class="p">:</span> <span class="n">isc_homogenisor</span><span class="o">.</span><span class="n">MagnitudeConversionRule</span><span class="p">(</span>
+        <span class="s1">'ISC'</span><span class="p">,</span> <span class="s1">'Ms'</span><span class="p">,</span>
+        <span class="n">isc_homogenisor</span><span class="o">.</span><span class="n">ISCGORMs_toGCMTMw</span><span class="p">,</span>
+        <span class="n">isc_homogenisor</span><span class="o">.</span><span class="n">ISCGORMs_toGCMTMw_Sigma</span>
+    <span class="p">),</span>
+    <span class="s1">'mb'</span><span class="p">:</span> <span class="n">isc_homogenisor</span><span class="o">.</span><span class="n">MagnitudeConversionRule</span><span class="p">(</span>
+        <span class="s1">'ISC'</span><span class="p">,</span> <span class="s1">'mb'</span><span class="p">,</span>
+        <span class="n">isc_homogenisor</span><span class="o">.</span><span class="n">ISCGORmb_toGCMTMw</span><span class="p">,</span>
+        <span class="n">isc_homogenisor</span><span class="o">.</span><span class="n">ISCGORmb_toGCMTMw_Sigma</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Below, a mock dataset representing raw earthquake data with different scales and original uncertainties (sigma) is created.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'event_id'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">'orig_scale'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Ms'</span><span class="p">,</span> <span class="s1">'mb'</span><span class="p">,</span> <span class="s1">'Ms'</span><span class="p">,</span> <span class="s1">'mb'</span><span class="p">],</span>
+    <span class="s1">'orig_mag'</span><span class="p">:</span> <span class="p">[</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">,</span> <span class="mf">6.1</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">],</span>
+    <span class="s1">'orig_sigma'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>event_id</th>
+      <th>orig_scale</th>
+      <th>orig_mag</th>
+      <th>orig_sigma</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Ms</td>
+      <td>7.2</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>mb</td>
+      <td>5.4</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Ms</td>
+      <td>6.1</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>mb</td>
+      <td>4.8</td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>You have a sample dataset and defined conversion rules. Now, you can run the code snippet below and homogenize your catalogue.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">homogenize</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Applies conversion rules to convert original magnitude to Mw.</span>
+<span class="sd">    Handles list outputs from GOR models and propagates uncertainty.</span>
+<span class="sd">    """</span>
+    <span class="n">rule</span> <span class="o">=</span> <span class="n">homog_rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'orig_scale'</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">rule</span><span class="p">:</span>
+        <span class="n">new_mag</span><span class="p">,</span> <span class="n">new_sigma</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">convert_value</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'orig_mag'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">'orig_sigma'</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_mag</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="n">new_mag</span> <span class="o">=</span> <span class="n">new_mag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">new_mag</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">new_sigma</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+
+<span class="n">df</span><span class="p">[[</span><span class="s1">'Mw_Unified'</span><span class="p">,</span> <span class="s1">'Sigma_Unified'</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">homogenize</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Homogenized Catalogue:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Homogenized Catalogue:
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>event_id</th>
+      <th>orig_scale</th>
+      <th>orig_mag</th>
+      <th>orig_sigma</th>
+      <th>Mw_Unified</th>
+      <th>Sigma_Unified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Ms</td>
+      <td>7.2</td>
+      <td>0.1</td>
+      <td>7.25</td>
+      <td>0.228</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>mb</td>
+      <td>5.4</td>
+      <td>0.1</td>
+      <td>5.66</td>
+      <td>0.330</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Ms</td>
+      <td>6.1</td>
+      <td>0.1</td>
+      <td>6.22</td>
+      <td>0.211</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>mb</td>
+      <td>4.8</td>
+      <td>0.1</td>
+      <td>4.83</td>
+      <td>0.330</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="catalogue.html" class="btn btn-neutral float-left" title="Catalogue" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="completeness.html" class="btn btn-neutral float-right" title="Completeness" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

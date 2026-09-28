@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seismic Source Module &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evenly Discretised Magnitude-Frequency Distribution (MFD)" href="mfd_calculation.html" />
+    <link rel="prev" title="Gutenberg-Richter Recurrence Model Fitting" href="mfd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Seismic Source Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-event-based-psha">Understanding Event-Based PSHA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-stochastic-event-sets-ses">Generating Stochastic Event Sets (SES)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-phase">Simulation phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-contents">Tutorial Contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mfd_calculation.html">Evenly Discretised Magnitude-Frequency Distribution (MFD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ses_generation.html">Stochastic Events Set Generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Seismic Source Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/ssc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="seismic-source-module">
+<h1>Seismic Source Module<a class="headerlink" href="#seismic-source-module" title="Permalink to this heading"></a></h1>
+<p>The <em>seismic source module</em> contains instructions and workflows for evaluating
+models related to seismic sources.</p>
+<p>This section outlines how to utilize the <strong>Event-Based PSHA</strong> calculator in
+the <a class="reference external" href="https://github.com/gem/oq-engine">OpenQuake Engine</a> specifically to generate
+<a class="reference internal" href="glossary.html#term-Stochastic-Event-Set-SES"><span class="xref std std-term">Stochastic Event Set (SES)</span></a>—synthetic catalogues of earthquake ruptures.</p>
+<section id="understanding-event-based-psha">
+<h2>Understanding Event-Based PSHA<a class="headerlink" href="#understanding-event-based-psha" title="Permalink to this heading"></a></h2>
+<p>Stochastic Event Set (SES) is a potential realization of the seismicity
+(i.e. a list of ruptures) produced by the source model over the investigation
+time for the hazard calculation. The Event-Based PSHA calculator utilizes Monte Carlo
+sampling <a class="reference internal" href="references.html#ref-musson-1999"><span class="std std-ref">[16]</span></a> to generate the SES.</p>
+<p>While the standard Event-Based PSHA calculator computes and stores stochastic
+event sets and the corresponding <a class="reference internal" href="glossary.html#term-Ground-Motion-Field-GMF"><span class="xref std std-term">Ground-Motion Field (GMF)</span></a> (often producing hazard
+curves and hazard maps similar to the <a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/user-guide/workflows/classical-psha.html">Classical PSHA calculator</a>), <strong>this module
+focuses only on the source generation phase.</strong> The computed synthetic
+catalogues are incredibly valuable for source modeling and can be used directly
+for comparisons against a real catalogue to validate the <a class="reference internal" href="glossary.html#term-Seismicity-rate"><span class="xref std std-term">seismicity rate</span></a> and rupture geometries.</p>
+<p>For more detailed information to Event-Based PSHA, please refer to Pagani et al., (2014) <a class="reference internal" href="references.html#ref-pagani-2014"><span class="std std-ref">[17]</span></a>
+and <a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/user-guide/outputs/event-based-psha-outputs.html#">OpenQuake Engine Documentation</a>.</p>
+</section>
+<section id="generating-stochastic-event-sets-ses">
+<h2>Generating Stochastic Event Sets (SES)<a class="headerlink" href="#generating-stochastic-event-sets-ses" title="Permalink to this heading"></a></h2>
+<p>To generate an SES without computing the subsequent hazard (<a class="reference internal" href="glossary.html#term-Ground-Motion-Field-GMF"><span class="xref std std-term">Ground-Motion Field (GMF)</span></a>),
+we only need to configure the OpenQuake Engine to sample the source <a class="reference internal" href="glossary.html#term-Logic-Tree"><span class="xref std std-term">logic tree</span></a> and
+generate the temporal and spatial distribution of ruptures.</p>
+<section id="inputs">
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h3>
+<p>All required input files for the event-based calculation is placed within <code class="docutils literal notranslate"><span class="pre">data/event_based_PSHA/</span></code>
+folder. Typically, this includes:</p>
+<ul class="simple">
+<li><p>Seismic Source Model XML file (<code class="docutils literal notranslate"><span class="pre">it_example.xml</span></code>).</p></li>
+<li><p>Source Logic Tree XML file (<code class="docutils literal notranslate"><span class="pre">source_model_logic_tree.xml</span></code>).</p></li>
+<li><p>Main configuration file (<code class="docutils literal notranslate"><span class="pre">job.ini</span></code>).</p></li>
+</ul>
+<p>You can find more detailed information for inputs in the <a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/user-guide/configuration-file/event-based-psha-config.html">OpenQuake Engine Documentation</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because we are exclusively generating earthquake ruptures and skipping the hazard
+calculation, you <strong>do not</strong> need to provide a Ground Motion Logic Tree (GMM) file or define site models.
+But we keep them in the data folder in case you wish to perform full event-based PSHA.</p>
+</div>
+</section>
+<section id="simulation-phase">
+<h3>Simulation phase<a class="headerlink" href="#simulation-phase" title="Permalink to this heading"></a></h3>
+<p>After you prepare the necessary input files of event-based PSHA, you can run the analysis
+and see outputs using your terminal (optional). To do these, there is a plenty of ways
+based on how you use OpenQuake engine. You might see the <a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/getting-started/running-calculations/index.html">Running Calculations
+section</a> for
+running calculations options and more detailed information.</p>
+</section>
+<section id="outputs">
+<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
+<p>At the end of an event-based calculation configured purely for <strong>Stochastic Event Sets generation</strong>, the
+OpenQuake engine will output the generated <strong>Stochastic Event Sets</strong>. The list of outputs
+can be seen using the <code class="docutils literal notranslate"><span class="pre">oq</span> <span class="pre">engine</span> <span class="pre">--lo</span> <span class="pre">&lt;calculation</span> <span class="pre">ID&gt;</span></code> command. In addition, you can export all the results of a
+given calculation using the <code class="docutils literal notranslate"><span class="pre">oq</span> <span class="pre">engine</span> <span class="pre">--eos</span> <span class="pre">&lt;calculation</span> <span class="pre">ID&gt;</span> <span class="pre">tmp</span></code> for further post-processing and
+comparison against your real catalogues.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the tutorial section below, you might find how to generate a stochastic event set from an
+<a class="reference external" href="https://github.com/gem/oq-engine/blob/master/openquake/hazardlib/source/area.py#L25">OQ Engine area source</a>
+with known geometry (i.e. a polygon in a shapefile or geojson),
+a <a class="reference external" href="https://github.com/gem/oq-engine/tree/master/openquake/hazardlib/mfd">magnitude-frequency distribution (MFD)</a>,
+and a hypocentral depth distribution (optionally specified by means of an <a class="reference external" href="https://github.com/gem/oq-engine/blob/master/openquake/hazardlib/pmf.py#L24">OQ Engine probability
+mass function</a>).</p>
+</div>
+</section>
+</section>
+<section id="tutorial-contents">
+<h2>Tutorial Contents<a class="headerlink" href="#tutorial-contents" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mfd_calculation.html">Evenly Discretised Magnitude-Frequency Distribution (MFD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ses_generation.html">Stochastic Events Set Generation</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mfd.html" class="btn btn-neutral float-left" title="Gutenberg-Richter Recurrence Model Fitting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mfd_calculation.html" class="btn btn-neutral float-right" title="Evenly Discretised Magnitude-Frequency Distribution (MFD)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

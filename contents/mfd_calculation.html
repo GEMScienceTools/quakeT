@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evenly Discretised Magnitude-Frequency Distribution (MFD) &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stochastic Events Set Generation" href="ses_generation.html" />
+    <link rel="prev" title="Seismic Source Module" href="ssc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ssc.html">Seismic Source Module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ssc.html#understanding-event-based-psha">Understanding Event-Based PSHA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssc.html#generating-stochastic-event-sets-ses">Generating Stochastic Event Sets (SES)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ssc.html#tutorial-contents">Tutorial Contents</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Evenly Discretised Magnitude-Frequency Distribution (MFD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ses_generation.html">Stochastic Events Set Generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ssc.html">Seismic Source Module</a></li>
+      <li class="breadcrumb-item active">Evenly Discretised Magnitude-Frequency Distribution (MFD)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/mfd_calculation.nblink.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Evenly-Discretised-Magnitude-Frequency-Distribution-(MFD)">
+<h1>Evenly Discretised Magnitude-Frequency Distribution (MFD)<a class="headerlink" href="#Evenly-Discretised-Magnitude-Frequency-Distribution-(MFD)" title="Permalink to this heading"></a></h1>
+<p>The typologies of <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-MagnitudeFrequency-Distribution-MFD">Magnitude-Frequency Distribution (MFD)</a> supported by the OQ Engine are available in this <a class="reference external" href="https://github.com/gem/oq-engine/tree/master/openquake/hazardlib/mfd">folder</a>. A description of these distributions is available <a class="reference external" href="https://docs.openquake.org/oq-engine/3.25/manual/user-guide/inputs/seismic-source-model-inputs.html#magnitude-frequency-distributions">here</a>.</p>
+<p>The main models supported are:</p>
+<ul class="simple">
+<li><p>Double Truncated MFD</p></li>
+<li><p>Evenly Spaced MFD</p></li>
+<li><p>Arbitrary MFD</p></li>
+<li><p>Tapered MFD</p></li>
+<li><p>Youngs and Coppersmith MFD</p></li>
+</ul>
+<p>In this notebook, we briefly show how you can utilize evenly discretised MFD as an example.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hazardlib.mfd</span><span class="w"> </span><span class="kn">import</span> <span class="n">EvenlyDiscretizedMFD</span>
+</pre></div>
+</div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">EvenlyDiscretizedMFD</span></code>, you need magnitudes, magnitude step, and rates for each magnitude as requirements.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">magnitude_step</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">magnitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">4.1</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="n">magnitude_step</span><span class="p">)</span>
+<span class="n">rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">magnitudes</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Histogram plot</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">magnitudes</span><span class="p">,</span> <span class="n">rates</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">magnitude_step</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Magnitude, m'</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Rates [ev/yr]'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/contents_mfd_calculation_4_0.png" src="../_images/contents_mfd_calculation_4_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the Evenly Discretised MFD</span>
+<span class="n">mfd</span> <span class="o">=</span> <span class="n">EvenlyDiscretizedMFD</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">magnitudes</span><span class="p">),</span> <span class="n">magnitude_step</span><span class="p">,</span> <span class="n">rates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Each magnitude-frequency available in the OQ Engine offers a number of default methods including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">check_constraints</span></code>: controls the instantiation of the MFD based on the information provided,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_annual_occurrence_rates</span></code>: returns a list of tuples, each one containing a magnitude and the corresponding rate,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_min_max_mag</span></code>: returns the minimum and maximum magnitudes,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modify_set_mfd</span></code>: applies absolute modification of the MFD from the min_mag, bin_width, and occurrence_rates modification.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mocc</span> <span class="o">=</span> <span class="n">mfd</span><span class="o">.</span><span class="n">get_annual_occurrence_rates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mocc</span><span class="p">])</span>
+<span class="n">rtes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mocc</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_mocc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"Magnitudes"</span><span class="p">:</span> <span class="n">mags</span><span class="p">,</span>
+    <span class="s2">"Rates"</span><span class="p">:</span> <span class="n">rtes</span>
+<span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_mocc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Magnitudes</th>
+      <th>Rates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4.1</td>
+      <td>0.102031</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.3</td>
+      <td>0.826247</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.5</td>
+      <td>0.812529</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.7</td>
+      <td>0.441247</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.9</td>
+      <td>0.181112</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.1</td>
+      <td>0.238289</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5.3</td>
+      <td>0.034432</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5.5</td>
+      <td>0.537567</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5.7</td>
+      <td>0.882729</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5.9</td>
+      <td>0.660822</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>6.1</td>
+      <td>0.719110</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>6.3</td>
+      <td>0.861916</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>6.5</td>
+      <td>0.905983</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>6.7</td>
+      <td>0.408337</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>6.9</td>
+      <td>0.977984</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ssc.html" class="btn btn-neutral float-left" title="Seismic Source Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ses_generation.html" class="btn btn-neutral float-right" title="Stochastic Events Set Generation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

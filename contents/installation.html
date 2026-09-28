@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Formats" href="data_formats.html" />
+    <link rel="prev" title="Welcome to the QuakeT documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#get-the-quaket-source-code">Get the QuakeT Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openquake-engine-setup">OpenQuake engine Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openquake-mbtk-setup">OpenQuake MBTK Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-environment-setup">Python Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#macos">macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#verification">Verification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssc.html">Seismic Source Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<p>This guide covers the necessary steps to set up your environment for the <strong>Simulation Platform</strong>. You will need to install Python dependencies and system-level tools like the Generic Mapping Tools (GMT) <a class="reference internal" href="references.html#ref-wessel-2019"><span class="std std-ref">[2]</span></a>.
+Also, the tutorials rely on the <a class="reference external" href="https://github.com/gem/oq-engine">OpenQuake engine</a> and <a class="reference external" href="https://github.com/GEMScienceTools/oq-mbtk/tree/master">OpenQuake Model Building Toolkit (oq-mbtk)</a>. Before proceeding, you must have <code class="docutils literal notranslate"><span class="pre">OpenQuake</span> <span class="pre">engine</span></code> and <code class="docutils literal notranslate"><span class="pre">oq-mbtk</span></code> installed.</p>
+<p>Here we demonstrate the installation of the QuakeT and its necessary dependencies, respectively.</p>
+<section id="get-the-quaket-source-code">
+<h2>Get the QuakeT Source Code<a class="headerlink" href="#get-the-quaket-source-code" title="Permalink to this heading"></a></h2>
+<p>Open a terminal and move to the folder where you intend to install the tools;</p>
+<p>Clone the repository using the <a class="reference external" href="https://github.com/GEMScienceTools/quakeT.git">web URL of QuakeT repository:</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/GEMScienceTools/quakeT.git
+</pre></div>
+</div>
+<p>Go to the folder where you cloned the QuakeT repository and make it in “editable” mod running the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="openquake-engine-setup">
+<h2>OpenQuake engine Setup<a class="headerlink" href="#openquake-engine-setup" title="Permalink to this heading"></a></h2>
+<p>Please follow the official installation instructions of <strong>OpenQuake Engine</strong> here:
+<a class="reference external" href="https://docs.openquake.org/oq-engine/manual/latest/getting-started/index.html#getting-started">OpenQuake engine Installation Guide.</a></p>
+</section>
+<section id="openquake-mbtk-setup">
+<h2>OpenQuake MBTK Setup<a class="headerlink" href="#openquake-mbtk-setup" title="Permalink to this heading"></a></h2>
+<p>Please follow the official installation instructions of <strong>oq-mbtk</strong> here:
+<a class="reference external" href="https://gemsciencetools.github.io/oq-mbtk/contents/installation.html">OpenQuake MBTK Installation Guide.</a></p>
+</section>
+<section id="python-environment-setup">
+<h2>Python Environment Setup<a class="headerlink" href="#python-environment-setup" title="Permalink to this heading"></a></h2>
+<p>It is highly recommended to use a virtual environment (conda or venv) to avoid dependency conflicts.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and activate a virtual environment (optional)</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>quaket_env
+<span class="nb">source</span><span class="w"> </span>quaket_env/bin/activate<span class="w">  </span><span class="c1"># On Windows: quaket_env\Scripts\activate</span>
+
+<span class="c1"># Install Python libraries</span>
+pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>geopandas<span class="w"> </span>shapely<span class="w"> </span>matplotlib<span class="w"> </span>ipython
+</pre></div>
+</div>
+</section>
+<section id="system-requirements">
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h2>
+<p>The spatial distribution tutorials require <strong>GMT</strong> to be installed on your operating system.</p>
+<section id="macos">
+<h3>macOS<a class="headerlink" href="#macos" title="Permalink to this heading"></a></h3>
+<p>The easiest way to install these tools on macOS is using <a class="reference external" href="https://brew.sh/">Homebrew</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>gmt
+</pre></div>
+</div>
+</section>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>GMT:</strong> Download and run the executable installer (.exe) from the <a class="reference external" href="https://www.generic-mapping-tools.org/download/">GMT Official Releases</a>. During installation, ensure you check the box <strong>“Add GMT to the system PATH”</strong>.</p></li>
+<li><p><strong>Ghostscript:</strong> (Required by GMT for PNG output) Download and install from the <a class="reference external" href="https://ghostscript.com/releases/gsdnld.html">Ghostscript site</a>.</p></li>
+</ol>
+</section>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading"></a></h3>
+<p>Use the package manager to install the required tools:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gmt<span class="w"> </span>gmt-dcw<span class="w"> </span>gmt-gshhg
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Permalink to this heading"></a></h2>
+<p>After installation, verify that the tools are correctly set up by running these commands in your terminal or command prompt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>--version
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you receive a “command not found” error, you may need to restart your terminal or manually add the installation folders to your system’s Environment Variables (PATH).</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the QuakeT documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data_formats.html" class="btn btn-neutral float-right" title="Data Formats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

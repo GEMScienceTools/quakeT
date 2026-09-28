@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutenberg-Richter Recurrence Model Fitting &mdash; QuakeT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seismic Source Module" href="ssc.html" />
+    <link rel="prev" title="Poisson Stationarity Analysis" href="interevent.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QuakeT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="auxiliary.html">Auxiliary Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="auxiliary.html#ssm-tutorial-contents">SSM Tutorial Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ses.html">Stochastic Earthquake Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="catalogue.html">Catalogue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homogenising.html">Magnitude Homogenization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="completeness.html">Completeness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="declustering.html">Declustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interevent.html">Poisson Stationarity Analysis</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gutenberg-Richter Recurrence Model Fitting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Aki-Maximum-Likelihood-(AkiMaxLikelihood)">Aki Maximum Likelihood (<code class="docutils literal notranslate"><span class="pre">AkiMaxLikelihood</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#GR-parameters-with-Time-Varying-Completeness-(BMaxLikelihood)">GR parameters with Time-Varying Completeness (<code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ssc.html">Seismic Source Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmc.html">Ground Motion Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="site.html">Site and Site-Effects Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QuakeT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="auxiliary.html">Auxiliary Module</a></li>
+      <li class="breadcrumb-item active">Gutenberg-Richter Recurrence Model Fitting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/contents/mfd.nblink.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Gutenberg-Richter-Recurrence-Model-Fitting">
+<h1>Gutenberg-Richter Recurrence Model Fitting<a class="headerlink" href="#Gutenberg-Richter-Recurrence-Model-Fitting" title="Permalink to this heading"></a></h1>
+<p>One of the fundamental components of <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Probabilistic-Seismic-Hazard-Analysis-PSHA">Probabilistic Seismic Hazard Analysis (PSHA)</a> is characterizing the seismicity of a source region by defining its <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-MagnitudeFrequency-Distribution-MFD">Magnitude-Frequency Distribution (MFD)</a>. The MFD quantifies the expected annual rate of earthquakes exceeding a specific
+magnitude threshold.</p>
+<p>The baseline mathematical framework for this analysis is the classic <strong>Gutenberg-Richter (G-R) recurrence law</strong> <a class="reference external" href="references.html#ref-gr-1944">[10]</a>, expressed as:</p>
+<div class="math notranslate nohighlight">
+\[\log_{10} N(M) = a - bM\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><strong>N(M)</strong> is the cumulative annual rate of earthquakes with magnitudes greater than or equal to <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p><strong>a-value</strong> represents the overall level of seismicity (productivity) of the zone.</p></li>
+<li><p><strong>b-value</strong> indicates the relative ratio of small to large earthquakes.</p></li>
+</ul>
+<p>This notebook provides a workflow for analyzing an <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Earthquake-catalogue">earthquake catalogue</a> and fitting recurrence parameters using the OpenQuake Hazard Modeller’s Toolkit <a class="reference external" href="references.html#ref-weatherill-2014">[1]</a>. Specifically, we present two different algorithms to derive the Gutenberg-Richter parameters: Aki Maximum Likelihood and B-Value Maximum Likelihood (Both is available in
+<a class="reference external" href="https://github.com/gem/oq-engine/tree/master/openquake/hmtk/seismicity/occurrence">openquake.hmtk.seismicity.occurrence</a>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hmtk.seismicity.catalogue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Catalogue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hmtk.seismicity.occurrence.aki_maximum_likelihood</span><span class="w"> </span><span class="kn">import</span> <span class="n">AkiMaxLikelihood</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openquake.hmtk.seismicity.occurrence.b_maximum_likelihood</span><span class="w"> </span><span class="kn">import</span> <span class="n">BMaxLikelihood</span>
+</pre></div>
+</div>
+</div>
+<section id="Aki-Maximum-Likelihood-(AkiMaxLikelihood)">
+<h2>Aki Maximum Likelihood (<code class="docutils literal notranslate"><span class="pre">AkiMaxLikelihood</span></code>)<a class="headerlink" href="#Aki-Maximum-Likelihood-(AkiMaxLikelihood)" title="Permalink to this heading"></a></h2>
+<p>Developed by Aki (1965) <a class="reference external" href="references.html#ref-aki-1965">[11]</a> and implemented here with the discrete bin-width correction by Bender (1983) <a class="reference external" href="references.html#ref-bender-1983">[12]</a>, this method estimates the <span class="math notranslate nohighlight">\(b\)</span>-value using a Maximum Likelihood Estimation (MLE) approach.</p>
+<p>While the original Aki formulation assumes a continuous magnitude distribution, earthquake catalogues group magnitudes into discrete bins (e.g., <span class="math notranslate nohighlight">\(\Delta M = 0.1\)</span>). To prevent statistical bias arising from this discretization, the code integrates Bender’s correction factor and formulates the calculation as:</p>
+<div class="math notranslate nohighlight">
+\[b = \frac{\log_{10}e}{\bar{M} - M_{min} + \frac{\Delta M}{2}}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\bar{M}}\)</span> (<code class="docutils literal notranslate"><span class="pre">m_ave</span></code>): The mean magnitude of the events that are equal to or greater than the completeness magnitude (<span class="math notranslate nohighlight">\(M \geq M_c\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{M_{min}}\)</span> (<code class="docutils literal notranslate"><span class="pre">m_min</span></code>): The minimum discrete magnitude bin placeholder above or equal to <span class="math notranslate nohighlight">\(M_c\)</span> within the sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\Delta M}\)</span> (<code class="docutils literal notranslate"><span class="pre">dmag</span></code>): The magnitude bin width interval (typically <span class="math notranslate nohighlight">\(0.1\)</span>).</p></li>
+</ul>
+<p>The standard deviation (<span class="math notranslate nohighlight">\(\sigma_b\)</span>) of the estimated <span class="math notranslate nohighlight">\(b\)</span>-value is computed using the sample variance weighted by the number of observations per bin, following Bender’s uncertainty estimator:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_b = \ln(10) \cdot b^2 \cdot \sqrt{\frac{\sum (M_i - \bar{M})^2}{N(N - 1)}}\]</div>
+<p>The required input for <code class="docutils literal notranslate"><span class="pre">AkiMaxLikelihood</span></code> algorithm is briefly described below. For more detailed information, please see <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/data_formats.html">Data Format section</a>.</p>
+<ul class="simple">
+<li><p><strong>catalogue (str):</strong> Path to the HMTK-formatted CSV catalogue.</p></li>
+<li><p><strong>Mc</strong>: Completeness magnitude for the catalogue.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/hmtk_sample_catalogue.csv"</span><span class="p">)</span>
+<span class="n">Mc</span> <span class="o">=</span> <span class="mf">3.5</span>
+
+<span class="n">catalogue</span> <span class="o">=</span> <span class="n">Catalogue</span><span class="p">()</span>
+<span class="n">catalogue</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'magnitude'</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">'magnitude'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s1">'year'</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)}</span>
+<span class="n">catalogue</span><span class="o">.</span><span class="n">end_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">end_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">catalogue</span><span class="o">.</span><span class="n">end_year</span><span class="p">)</span>
+<span class="n">start_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">catalogue</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">time_span</span> <span class="o">=</span> <span class="n">end_year</span> <span class="o">-</span> <span class="n">start_year</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Start year=</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s2">, End year=</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s2">, Time Span=</span><span class="si">{</span><span class="n">time_span</span><span class="si">}</span><span class="s2"> years"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Start year=1, End year=10000, Time Span=10000 years
+</pre></div></div>
+</div>
+<p>Below, you see how to obtain <span class="math notranslate nohighlight">\(b\)</span>-value, its sigma, and <span class="math notranslate nohighlight">\(a\)</span>-value.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># b_val and sigma_b calculation</span>
+<span class="n">b_val</span><span class="p">,</span> <span class="n">sigma_b</span> <span class="o">=</span> <span class="n">AkiMaxLikelihood</span><span class="p">()</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">catalogue</span><span class="p">,</span> <span class="n">completeness</span><span class="o">=</span><span class="n">Mc</span><span class="p">)</span>
+
+<span class="c1"># a_val calculation</span>
+<span class="n">df_complete</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Mc</span><span class="p">]</span>
+<span class="n">neq_complete</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_complete</span><span class="p">)</span>
+
+<span class="c1"># Annualized earthquake rate (N_cumulative / T)</span>
+<span class="n">annual_rate</span> <span class="o">=</span> <span class="n">neq_complete</span> <span class="o">/</span> <span class="n">time_span</span>
+<span class="n">a_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">annual_rate</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_val</span> <span class="o">*</span> <span class="n">Mc</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Results: a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ±</span><span class="si">{</span><span class="n">sigma_b</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Results: a=3.881, b=0.888 ±0.004
+</pre></div></div>
+</div>
+<p>You can plot the FMD using obtained GR parameters, and catalogue.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot FMD</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">hist</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">cum_evars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">hist</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">m_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">Mc</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">v_model</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">a_val</span> <span class="o">-</span> <span class="n">b_val</span> <span class="o">*</span> <span class="n">m_model</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">cum_evars</span> <span class="o">/</span> <span class="n">time_span</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Cumulative"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">hist</span> <span class="o">/</span> <span class="n">time_span</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"g"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Incremental"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m_model</span><span class="p">,</span> <span class="n">v_model</span><span class="p">,</span> <span class="s2">"r--"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"GR Fit (a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Magnitude ($M_w$)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Annual Rate of Events (N/year)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"FMD: Aki-Maximum Likelihood Estimation"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/contents_mfd_9_0.png" src="../_images/contents_mfd_9_0.png" />
+</div>
+</div>
+</section>
+<section id="GR-parameters-with-Time-Varying-Completeness-(BMaxLikelihood)">
+<h2>GR parameters with Time-Varying Completeness (<code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code>)<a class="headerlink" href="#GR-parameters-with-Time-Varying-Completeness-(BMaxLikelihood)" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code> algorithm enables an advanced extension based on Utsu (1965) <a class="reference external" href="references.html#ref-utsu-1965">[13]</a>, Weichert (1980) <a class="reference external" href="references.html#ref-weichert-1980">[14]</a>, and Bender (1983) <a class="reference external" href="references.html#ref-bender-1983">[12]</a> that accounts for both magnitude binning/discretization effects and time-varying <a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Magnitude-completeness-Mc">magnitude completeness (Mc)</a>.</p>
+<p><a class="reference external" href="https://gemsciencetools.github.io/quakeT/contents/glossary.html#term-Historical-catalogue">Historical catalogues</a> are inherently non-homogeneous because seismic networks improve over time; smaller earthquakes are fully captured in recent years, whereas only larger events were recorded in the past. Treating such a partitioned catalogue with a completeness magnitude leads to systematic bias in Gutenberg-Richter parameters.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code> operates by partitioning the catalogue into distinct temporal windows based on a completeness table (defined by cut-off years <span class="math notranslate nohighlight">\(T_i\)</span> and corresponding magnitudes <span class="math notranslate nohighlight">\(M_{c,i}\)</span>).</p>
+<p>For each chronological interval, the <code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code> isolates compliant events and invokes an underlying Aki MLE sub-routine with Bender’s bin-width (<span class="math notranslate nohighlight">\(\Delta M\)</span>) correction:</p>
+<div class="math notranslate nohighlight">
+\[b_i = \frac{\log_{10}e}{\bar{M}_i - M_{min,i} + \frac{\Delta M}{2}}\]</div>
+<p>Once local <span class="math notranslate nohighlight">\(b\)</span>-values (<span class="math notranslate nohighlight">\(b_i\)</span>) and their uncertainties (<span class="math notranslate nohighlight">\(\sigma_{b,i}\)</span>) are stacked for all valid intervals, a single unified <span class="math notranslate nohighlight">\(b_{final}\)</span> is derived using a statistical ensemble approach defined in the configuration (<code class="docutils literal notranslate"><span class="pre">Weighted</span></code> or <code class="docutils literal notranslate"><span class="pre">Harmonic</span></code> mean):</p>
+<div class="math notranslate nohighlight">
+\[b_{final} = \sum_{i=1}^{k} \left( b_i \cdot \frac{N_i}{N_{total}} \right)\]</div>
+<p>Where <span class="math notranslate nohighlight">\(N_i\)</span> is the number of events in the <span class="math notranslate nohighlight">\(i\)</span>-th temporal completeness block.</p>
+<p>Unlike the <code class="docutils literal notranslate"><span class="pre">AkiMaxLikelihood</span></code>, <code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code> jointly solves for the annualized productivity parameter (<span class="math notranslate nohighlight">\(a\)</span>-value) using the maximum likelihood solution for multi-period data formulated by Weichert (1980) <a class="reference external" href="references.html#ref-weichert-1980">[14]</a> and McGuire (2004) <a class="reference external" href="references.html#ref-mcguire-2004">[15]</a>.</p>
+<div class="math notranslate nohighlight">
+\[\lambda(M_{min}) = \frac{\sum_{i=1}^{k} N_i}{\sum_{i=1}^{k} \left( T_i \cdot e^{-\beta M_j} \right)}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(T_i\)</span> represents the seismic observation duration (years) for each interval, and <span class="math notranslate nohighlight">\(\beta = b_{final} \cdot \ln(10)\)</span>. The calculated scalar is then mapped back to the baseline minimum magnitude (<span class="math notranslate nohighlight">\(M_{min}\)</span>) to compute the annualized <span class="math notranslate nohighlight">\(a\)</span>-value:</p>
+<div class="math notranslate nohighlight">
+\[a = \log_{10}(\lambda(M_{min})) + b_{final} \cdot M_{min}\]</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">BMaxLikelihood</span></code> requires specific data structures and configuration parameters to handle time-varying completeness.</p>
+<ul class="simple">
+<li><p><strong>catalogue</strong>: An instance of the HMTK Catalogue object containing the earthquake database (specifically requires <code class="docutils literal notranslate"><span class="pre">magnitude</span></code> and <code class="docutils literal notranslate"><span class="pre">year</span></code> attributes).</p></li>
+<li><p><strong>completeness</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>): A 2D completeness matrix/table structured as <code class="docutils literal notranslate"><span class="pre">[[year_1,</span> <span class="pre">Mc_1],</span> <span class="pre">[year_2,</span> <span class="pre">Mc_2],</span> <span class="pre">...]</span></code>. It defines the chronological cut-off thresholds where specific magnitude ranges become statistically complete.</p></li>
+<li><p><strong>config</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>): A configuration dictionary containing the execution hyper-parameters:</p>
+<ul>
+<li><p><strong>Average Type</strong> (<em>str</em>): Method used to ensemble the multi-period recurrence trends. Options are <code class="docutils literal notranslate"><span class="pre">&quot;Weighted&quot;</span></code> (proportional to event-counts per window, recommended) or <code class="docutils literal notranslate"><span class="pre">&quot;Harmonic&quot;</span></code> mean.</p></li>
+<li><p><strong>magnitude_interval</strong> (<em>float</em>): The magnitude bin width or rounding increment used in the catalog (typically <code class="docutils literal notranslate"><span class="pre">0.1</span></code>), critical for Bender’s discretization correction.</p></li>
+<li><p><strong>completeness</strong> (<em>bool</em>): Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to activate multi-period analysis.</p></li>
+<li><p><strong>reference_magnitude</strong> (<em>float</em>):</p>
+<ul>
+<li><p>If set to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code>, the module executes standard Gutenberg-Richter reporting and returns the annualized <span class="math notranslate nohighlight">\(a\)</span>-value, <span class="math notranslate nohighlight">\(b\)</span>-value, and their respective uncertainties.</p></li>
+<li><p>If a specific engineering design magnitude is provided (e.g., <span class="math notranslate nohighlight">\(M_w = 5.0\)</span>), the algorithm bypasses standard parameter reporting and outputs the calculated <strong>annual exceedance rate</strong> (<span class="math notranslate nohighlight">\(\lambda\)</span>) and its variance for that exact threshold.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bin_w</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">Mc</span> <span class="o">=</span> <span class="mf">3.5</span>
+<span class="n">start_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"year"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">end_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">catalogue</span><span class="o">.</span><span class="n">end_year</span><span class="p">)</span>
+<span class="n">total_years</span> <span class="o">=</span> <span class="n">end_year</span> <span class="o">-</span> <span class="n">start_year</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">completeness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">start_year</span><span class="p">,</span> <span class="n">Mc</span><span class="p">]])</span>
+
+<span class="c1"># Config</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Average Type"</span><span class="p">:</span> <span class="s2">"Weighted"</span><span class="p">,</span>
+    <span class="s2">"reference_magnitude"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s2">"magnitude_interval"</span><span class="p">:</span> <span class="n">bin_w</span><span class="p">,</span>
+    <span class="s2">"completeness"</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># b_val, sigma_b, a_val, and sigma_a calculation</span>
+<span class="n">b_val</span><span class="p">,</span> <span class="n">sigma_b</span><span class="p">,</span> <span class="n">a_val</span><span class="p">,</span> <span class="n">sigma_a</span> <span class="o">=</span> <span class="n">BMaxLikelihood</span><span class="p">()</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">catalogue</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">completeness</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Results: a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ±</span><span class="si">{</span><span class="n">sigma_a</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ±</span><span class="si">{</span><span class="n">sigma_b</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--- ctime 1.0  m_c 3.5
+Results: a=3.881 ±0.013, b=0.888 ±0.004
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot FMD</span>
+<span class="n">m_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">bin_w</span><span class="p">,</span> <span class="n">bin_w</span><span class="p">)</span>
+<span class="n">hist</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">m_bins</span><span class="p">)</span>
+<span class="n">cum_events</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">hist</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">m_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">Mc</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">"magnitude"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">gr_model_total</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">a_val</span> <span class="o">-</span> <span class="n">b_val</span> <span class="o">*</span> <span class="n">m_model</span><span class="p">))</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">cum_events</span> <span class="o">/</span> <span class="n">total_years</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Cumulative"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">hist</span> <span class="o">/</span> <span class="n">total_years</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"g"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Incremental"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m_model</span><span class="p">,</span> <span class="n">gr_model_total</span><span class="p">,</span> <span class="s2">"r--"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"GR Fit (a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Magnitude ($M_w$)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Annual Rate of Events (N/year)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"FMD: B-Maximum Likelihood Estimation"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/contents_mfd_14_0.png" src="../_images/contents_mfd_14_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interevent.html" class="btn btn-neutral float-left" title="Poisson Stationarity Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ssc.html" class="btn btn-neutral float-right" title="Seismic Source Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright GEM Foundation and Électricité de France.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
